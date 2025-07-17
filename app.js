@@ -8,11 +8,15 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash=require("connect-flash");
+const passport=require("passport");
+const Localstrategy=require("passport-local");
+const User=require("./models/user.js");
 
 
 
-const listings = require("./routes/listing.js");
-const review = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const UserRouter = require("./routes/user.js");
 
 
 async function main() {
@@ -56,16 +60,40 @@ app.get("/", (req, res) => {
 
 app.use(session(sessionOptions));
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new Localstrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+
+
+
 app.use((req,res,next)=>{
   res.locals.success=req.flash("success");
   res.locals.error=req.flash("error");
   next();
 })
 
+// //demouser route to check autentication
+// app.get("/demouser",async(req,res)=>{
+//   let fakeUser=new User({
+//     email:"student@gmail.com",
+//     username :"delta-student",
+//   });
+   
+//   let registeredUser=await User.register(fakeUser,"helloworld");
+//   res.send(registeredUser);
+// })
 
 
-app.use("/listings", listings);
-app.use("/listings/:id/review", review);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/review",reviewRouter);
+app.use("/",UserRouter);
 
 
 

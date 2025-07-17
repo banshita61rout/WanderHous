@@ -1,5 +1,4 @@
 body{
-    
     display:flex;
     flex-direction:column;
     min-height: 100vh;
@@ -23,6 +22,18 @@ body{
 }
 
 /* footer*/
+.f-info{
+ width: 100%;
+ text-align: center;
+ height: 5rem;
+ background-color:rgb(212, 206, 206);
+ display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+  width: 100%;
+}
+
 .f-info-links a{
     text-decoration:none;
     color:#222222;
@@ -45,15 +56,7 @@ font-size: 1.3rem;
 margin-right: 1rem;
 }
 
-.f-info{
- text-align: center;
- height: 5rem;
- background-color:rgb(212, 206, 206);
- display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: space-evenly;
-}
+
 
 /*cards  index.ejs*/
 .listing-card{
