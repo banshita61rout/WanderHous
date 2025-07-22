@@ -7,12 +7,15 @@
     <img src="<%= listing.image.url%>" class="card-img-top show-img" alt="listing_image">
     
     <div class="card-body">
-      <p class="card-text">
-        <%= listing.description %><br>
-        &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /Night<br>
-        <%= listing.location %><br>
-        <%= listing.country %>
-      </p>
+      <p class="card-text">Owned by <% if (listing.owner) { %>
+  Owned by <%= listing.owner.username %>
+<% } else { %>
+  Owner information not available
+<% } %> </p>
+        <p><%= listing.description %></p>
+        <p> &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /Night</p>
+        <p><%= listing.location %></p>
+        <p><%= listing.country %></p>
     </div>
     </form>
   </div>
