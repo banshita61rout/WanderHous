@@ -1,3 +1,8 @@
+if (process.nextTick.NODE_ENV != "production") {
+  require('dotenv').config();
+}
+console.log(process.env.SECRET);
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -7,10 +12,10 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
-const flash=require("connect-flash");
-const passport=require("passport");
-const Localstrategy=require("passport-local");
-const User=require("./models/user.js");
+const flash = require("connect-flash");
+const passport = require("passport");
+const Localstrategy = require("passport-local");
+const User = require("./models/user.js");
 
 
 
@@ -44,10 +49,10 @@ const sessionOptions = {
   secret: "mysupersecretcode",
   resave: false,
   saveUninitialized: true,
-  cookie:{
-    expires:Date.now() +7*24*60*60*1000,     //one week time(day+total hours + minutes + seconds + miliseconds)
-    maxAge:7*24*60*60*1000,
-    httpOnly:true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000, //one week time(day+total hours + minutes + seconds + miliseconds)
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
   },
 };
 
@@ -73,10 +78,10 @@ passport.deserializeUser(User.deserializeUser());
 
 
 
-app.use((req,res,next)=>{
-  res.locals.success=req.flash("success");
-  res.locals.error=req.flash("error");
-  res.locals.currUser=req.user;
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 })
 
@@ -86,15 +91,15 @@ app.use((req,res,next)=>{
 //     email:"student@gmail.com",
 //     username :"delta-student",
 //   });
-   
+
 //   let registeredUser=await User.register(fakeUser,"helloworld");
 //   res.send(registeredUser);
 // })
 
 
 app.use("/listings", listingRouter);
-app.use("/listings/:id/review",reviewRouter);
-app.use("/",UserRouter);
+app.use("/listings/:id/review", reviewRouter);
+app.use("/", UserRouter);
 
 
 

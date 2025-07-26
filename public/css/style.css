@@ -93,10 +93,26 @@ background-color: white;
 }
   
 /* edit.ejs page */
-.edit-btn3{
+/* .edit-btn3{
  background-color: purple !important;
  border: none !important;;
+} */
+
+.btn3 {
+  background-color: transparent !important;
+  color: purple !important;
+  border: 2px solid purple !important;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+.btn3:hover {
+  background-color: purple !important;
+  color: white !important;
+}
+
 
 /* show page */
 .show-img{
