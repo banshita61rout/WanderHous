@@ -1,9 +1,110 @@
 <% layout("/layouts/boilerplate")%>
+<!-- <h3>All Listings</h3> -->
+<style>
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.filter {
+  text-align: center;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  opacity: 0.8;
+  color: black;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.filter i {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #671367; 
+}
+
+.filter a {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+</style>
+
+<div id="filters">
+  <div class="filter">
+    <i class="fa-solid fa-house-chimney fa-xl"></i>
+    <a href="/listings">Explore</a>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-fire fa-xl"></i>
+    <p>Trending</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-bell fa-xl"></i>
+    <p>Services</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-bed fa-xl"></i>
+    <p>Rooms</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-city fa-xl"></i>
+    <p>Iconic cities</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-person-swimming fa-xl"></i>
+    <p>Beach</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-mountain fa-xl"></i>
+    <p>Amazing views</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-water fa-xl"></i>
+    <p>Lakefront</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-tent fa-xl"></i>
+    <p>Camping</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-school-flag fa-xl"></i>
+    <p>castles</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-water-ladder fa-xl"></i>
+    <p>Amazing pool</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-snowflake fa-xl"></i>
+    <p>Arctic</p>
+  </div> 
+
+</div>
 
 
-    <h3>All Listings</h3>
 
-    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-3">
+
+
+     </div>
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-3 mt-3">
           <%  for(let listing of alllistings){  %>
          <a href="/listings/<%=listing._id%>" class="listing-link"> 
             <div class="card col listing-card" >

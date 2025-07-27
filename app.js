@@ -56,10 +56,10 @@ const sessionOptions = {
   },
 };
 
-// Home route
-app.get("/", (req, res) => {
-  res.send("Hi! I'm Banshita... welcome to this site");
-});
+// // Home route
+// app.get("/", (req, res) => {
+//   res.send("Hi! I'm Banshita... welcome to this site");
+// });
 
 
 
