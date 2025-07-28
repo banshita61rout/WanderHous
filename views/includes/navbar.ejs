@@ -1,19 +1,56 @@
+<style>
+   .search-btn{
+    background-color:rgb(110, 28, 110) ;
+    color:white;
+    border-radius: 20px;
+    padding:0 1rem 0 1rem;
+}
+.search-btn:hover{
+    background-color: rgb(69, 30, 69);
+    color:white;
+}
+.search-btn i{
+  display: inline;
+  margin-right: 0.5rem;
+}
+
+.search-inp{
+border-radius: 20px;
+padding:0.5rem 3rem 0.5rem 3rem;
+font-size: 0.9rem;
+}
+
+
+
+
+</style>
+
+
+
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center gap-2" href="/listings" style="text-decoration: none;">
-  <i class="fa-solid fa-paper-plane"style="font-size: 1.9rem; color: rgb(102, 41, 102);"></i>
-  <span style="color: rgb(110, 28, 110); font-weight: bold; font-size: 1.7rem;">WanderHous</span>
-</a>
+      <i class="fa-solid fa-paper-plane" style="font-size: 1.9rem; color: rgb(102, 41, 102);"></i>
+      <span style="color: rgb(110, 28, 110); font-weight: bold; font-size: 1.7rem;">WanderHous</span>
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
 
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    
 
+<div class="navbar-nav ms-auto">
+   <form class="d-flex" role="search">
+      <input class="form-control me-2 search-inp" type="search" placeholder="Search Destinations"/>
+      <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+    </form>
+</div>
       <div class="navbar-nav ms-auto">
-         <a class="nav-link" href="/listings/new">Become New Host</a>
+        <div><a class="nav-link" href="/listings"> <i class="fa-solid fa-house-chimney fa-xl"></i></a></div>
+
+        <a class="nav-link" href="/listings/new"><b>Become New Host</b></a>
         <% if (!currUser){%>
         <a class="nav-link " href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Log in </b></a>

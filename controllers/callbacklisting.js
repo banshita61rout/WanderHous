@@ -3,6 +3,7 @@ const Listing = require('../models/listing.js');
 //index
 module.exports.index=async (req, res) => {
   const alllistings = await Listing.find({});
+  req.flash("success", "Welcome to the Home page of WanderHous!");
   res.render("listings/index.ejs", {
     alllistings
   });

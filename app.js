@@ -7,11 +7,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderhous";
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const Localstrategy = require("passport-local");
@@ -19,14 +19,13 @@ const User = require("./models/user.js");
 
 
 
+const dbURL=process.env.ATLASDB_URL;
+
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const UserRouter = require("./routes/user.js");
 
 
-async function main() {
-  await mongoose.connect(MONGO_URL);
-}
 main()
   .then(() => {
 
@@ -35,6 +34,15 @@ main()
   .catch((err) => {
     console.log(err);
   });
+
+
+async function main() {
+  await mongoose.connect(dbURL);
+}
+
+
+
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({
@@ -44,9 +52,23 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+const store=MongoStore.create({
+  mongoUrl:dbURL,
+  cryto:{
+    secret:process.env.SECRET,
+  },
+  touchAfter:24*3600,
+});
+
+store.on("error",()=>{
+  console.log("ERROR in MONGO SESSION STORE",err);
+});
+
+
 
 const sessionOptions = {
-  secret: "mysupersecretcode",
+  store,
+  secret:process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -56,10 +78,7 @@ const sessionOptions = {
   },
 };
 
-// // Home route
-// app.get("/", (req, res) => {
-//   res.send("Hi! I'm Banshita... welcome to this site");
-// });
+
 
 
 
@@ -85,16 +104,6 @@ app.use((req, res, next) => {
   next();
 })
 
-// //demouser route to check autentication
-// app.get("/demouser",async(req,res)=>{
-//   let fakeUser=new User({
-//     email:"student@gmail.com",
-//     username :"delta-student",
-//   });
-
-//   let registeredUser=await User.register(fakeUser,"helloworld");
-//   res.send(registeredUser);
-// })
 
 
 app.use("/listings", listingRouter);
