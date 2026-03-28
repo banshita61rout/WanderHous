@@ -4,7 +4,9 @@ const Listing = require('../models/listing.js');
 module.exports.index=async (req, res) => {
   const alllistings = await Listing.find({});
   req.flash("success", "Welcome to the Home page of WanderHous!");
+
   res.render("listings/index.ejs", {
+    
     alllistings
   });
 };
@@ -94,6 +96,6 @@ module.exports.deleteListing=async (req, res) => {
   } = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log("deletedListing");
-  req.flash("success", "Listing Deleted!");
+  req.flash("success", "Listing Deleted successfully!");
   res.redirect("/listings");
 }
